@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "LoginScreen",
+            "request": "launch",
+            "mainClass": "LoginScreen",
+            "projectName": "StudentSystem_30e34f61",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-17.0.16\\lib\" --add-modules javafx.controls,javafx.fxml"
+
+        },
+        {
+            "type": "java",
+            "name": "StudentManagementSystem",
+            "request": "launch",
+            "mainClass": "StudentManagementSystem",
+            "projectName": "StudentSystem_30e34f61",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-17.0.16\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-17.0.16\\lib\" --add-modules javafx.controls,javafx.fxml"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "App",
+            "projectName": "StudentSystem_30e34f61",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-17.0.16\\lib\" --add-modules javafx.controls,javafx.fxml"
+        }
+    ]
+}
