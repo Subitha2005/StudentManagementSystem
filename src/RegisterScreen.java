@@ -1,16 +1,14 @@
-import javafx.application.Application;
 import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class LoginScreen extends Application {
+public class RegisterScreen {
 
-    @Override
     public void start(Stage stage) {
 
-        Label lbl = new Label("Student Management Login");
+        Label lbl = new Label("User Registration");
         lbl.getStyleClass().add("heading");
 
         TextField userField = new TextField();
@@ -21,35 +19,43 @@ public class LoginScreen extends Application {
         passField.setPromptText("Password");
         passField.getStyleClass().add("input-field");
 
+        TextField nameField = new TextField();
+        nameField.setPromptText("Full Name");
+        nameField.getStyleClass().add("input-field");
+
         Label msg = new Label();
         msg.getStyleClass().add("error-label");
 
-        Button loginBtn = new Button("Login");
-        loginBtn.getStyleClass().add("primary-btn");
+        Button registerBtn = new Button("Register");
+        registerBtn.getStyleClass().add("primary-btn");
 
-        Hyperlink registerLink = new Hyperlink("New user? Register here");
+        Hyperlink backLink = new Hyperlink("← Back to Login");
 
-        loginBtn.setOnAction(e -> {
-            String u = userField.getText();
-            String p = passField.getText();
+        registerBtn.setOnAction(e -> {
+            boolean ok = UserService.register(
+                    userField.getText(),
+                    passField.getText(),
+                    nameField.getText(),
+                    "user"
+            );
 
-            if (AuthService.authenticate(u, p)) {
-                new DashboardScreen().start(stage);
-                UserSession.login(u);
+            if (ok) {
+                msg.setText("Registration successful!");
+                msg.setStyle("-fx-text-fill: green;");
             } else {
-                msg.setText("Invalid credentials");
+                msg.setText("Registration failed");
             }
         });
 
-        registerLink.setOnAction(e -> new RegisterScreen().start(stage));
+        backLink.setOnAction(e -> new LoginScreen().start(stage));
 
-        VBox form = new VBox(
-                15,
+        VBox form = new VBox(15,
                 lbl,
                 userField,
                 passField,
-                loginBtn,
-                registerLink,
+                nameField,
+                registerBtn,
+                backLink,
                 msg
         );
         form.setAlignment(Pos.CENTER);
@@ -59,15 +65,12 @@ public class LoginScreen extends Application {
         StackPane root = new StackPane(form);
         root.getStyleClass().add("background");
 
-        Scene scene = new Scene(root, 450, 380);
+        Scene scene = new Scene(root, 450, 420);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         stage.setScene(scene);
-        stage.setTitle("Login");
+        stage.setTitle("Register");
         stage.show();
     }
-
-    public static void main(String[] args) {
-        launch();
-    }
 }
+

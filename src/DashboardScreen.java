@@ -21,6 +21,7 @@ public class DashboardScreen extends Application {
     private PieChart genderChart = new PieChart();
     private BarChart<String, Number> yearChart;
 
+    @SuppressWarnings("unchecked")
     @Override
     public void start(Stage stage) {
         // --- Table columns ---
@@ -88,6 +89,23 @@ public class DashboardScreen extends Application {
                 showAlert("No Selection", "Please select a student to delete.");
             }
         });
+        // --- Logout Button ---
+        Button logoutBtn = new Button("Logout");
+        logoutBtn.getStyleClass().add("danger-btn");
+
+        logoutBtn.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Logout");
+            alert.setHeaderText("Confirm Logout");
+            alert.setContentText("Are you sure you want to logout?");
+
+            alert.showAndWait().ifPresent(res -> {
+                if (res == ButtonType.OK) {
+                    new LoginScreen().start(stage);
+                }
+            });
+        });
+
 
         HBox btns = new HBox(15, addBtn, editBtn, delBtn);
         btns.setPadding(new Insets(10));
@@ -105,6 +123,12 @@ public class DashboardScreen extends Application {
         sidebar.setPadding(new Insets(20));
         sidebar.setPrefWidth(280);
         sidebar.getStyleClass().add("sidebar");
+       
+       
+        HBox topBar = new HBox(logoutBtn);
+        topBar.setAlignment(Pos.CENTER_RIGHT);
+        topBar.setPadding(new Insets(10, 20, 10, 20));
+        topBar.getStyleClass().add("top-bar");
 
         // --- Right content ---
         VBox content = new VBox(20, yearChart, table, btns);
@@ -112,6 +136,7 @@ public class DashboardScreen extends Application {
 
         // --- Root layout ---
         BorderPane root = new BorderPane();
+        root.setTop(topBar);
         root.setLeft(sidebar);
         root.setCenter(content);
         root.getStyleClass().add("dashboard-root");
@@ -147,6 +172,7 @@ public class DashboardScreen extends Application {
 
             // Create one series per year (for different colors)
             int colorIndex = 0;
+            System.out.println(colorIndex);
             for (Map.Entry<Integer, Integer> entry : years.entrySet()) {
                 XYChart.Series<String, Number> series = new XYChart.Series<>();
                 series.setName("Year " + entry.getKey()); // legend label

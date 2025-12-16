@@ -9,9 +9,17 @@
             "name": "LoginScreen",
             "request": "launch",
             "mainClass": "LoginScreen",
-            "projectName": "StudentSystem_30e34f61",
+            "projectName": "StudentSystem_a5dc651b",
             "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-17.0.16\\lib\" --add-modules javafx.controls,javafx.fxml"
 
+        },
+        {
+            "type": "java",
+            "name": "LoginScreen",
+            "request": "launch",
+            "mainClass": "LoginScreen",
+            "projectName": "StudentSystem_30e34f61",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-17.0.16\\lib\" --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
